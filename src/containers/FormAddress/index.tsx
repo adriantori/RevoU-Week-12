@@ -1,35 +1,39 @@
-import { Input, DatePicker, Form } from 'antd';
+import { Input, Form } from 'antd';
 import { Button, Container, Text } from '../../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import dayjs from 'dayjs';
 
-interface Personal {
-    name: string;
-    email: string;
-    dob: Date;
+interface Address {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
 }
 
-interface PersonalOutput {
+interface AddressOutput {
     onNext: () => void;
     onPrev: () => void;
 }
 
 const initalValues = {
-    name: 'John Doe',
-    email: 'John@doe.com',
-    dob: new Date('1945-8-17')
+    street: 'Jalan',
+    city: 'Kota',
+    state: 'Provinsi',
+    zipCode: '12345'
 }
 
 const validationSchema = yup.object({
-    name: yup.string().required('Full name must exist'),
-    email: yup.string().email().required('Email must exist with email format (a@b.c)'),
-    dob: yup.date().max(new Date(Date.now() - 567648000000)).required('You must be at least 18 years old')
+    street: yup.string().required('Street must exist'),
+    city: yup.string().required('City must exist'),
+    state: yup.string().required('State must exist'),
+    zipCode: yup.string().length(5, 'Zip Code must be 5 digits')
+        .matches(/^[0-9]{5}/, 'Zip Code must be 5 numeric (12345)')
+        .required('Zip Code must exist')
 })
 
-const FormAddress: React.FC<PersonalOutput> = ({ onNext, onPrev }) => {
+const FormAddress: React.FC<AddressOutput> = ({ onNext, onPrev }) => {
 
-    const handleSubmit = (values: Personal) => {
+    const handleSubmit = (values: Address) => {
         console.log(values)
     }
 
@@ -39,30 +43,67 @@ const FormAddress: React.FC<PersonalOutput> = ({ onNext, onPrev }) => {
         validationSchema: validationSchema
     })
 
+    const handleNext = () => {
+        formik.handleSubmit();
+        if (formik.isValid) {
+            onNext();
+        }
+    };
+
     return (
         <Container>
             <Form onFinish={formik.handleSubmit}>
-                <Text>Full Name:</Text>
-                <Input
-                    name={'fullName'}
-                    value={formik.values.name}
-                    onChange={formik.handleChange('name')}
-                    status={formik.errors.name && 'error'} />
-                <Text>Email Address:</Text>
-                <Input
-                    name={'fullName'}
-                    value={formik.values.email}
-                    onChange={formik.handleChange('email')}
-                    status={formik.errors.email && 'error'} />
-                <Text>Date of Birth:</Text>
-                <DatePicker
-                    name={'dateOfBirth'}
-                    value={formik.values.dob ? dayjs(formik.values.dob) : undefined}
-                    onChange={(date) => { formik.setFieldValue('dob', date?.toDate() || null) }}
-                    status={formik.errors.dob && 'error'}
-                /><br/>
+                <div>
+                    <Text>Street Address:</Text>
+                    <Input
+                        name={'address'}
+                        value={formik.values.street}
+                        onChange={formik.handleChange('street')}
+                        status={formik.errors.street && 'error'}
+                    />
+                    {formik.errors.street && (
+                        <Text type='danger'>{formik.errors.street}</Text>
+                    )}
+                </div>
+                <div>
+                    <Text>City</Text>
+                    <Input
+                        name={'city'}
+                        value={formik.values.city}
+                        onChange={formik.handleChange('city')}
+                        status={formik.errors.city && 'error'}
+                    />
+                    {formik.errors.city && (
+                        <Text type='danger'>{formik.errors.city}</Text>
+                    )}
+                </div>
+                <div>
+                    <Text>State</Text>
+                    <Input
+                        name={'state'}
+                        value={formik.values.state}
+                        onChange={formik.handleChange('state')}
+                        status={formik.errors.state && 'error'}
+                    />
+                    {formik.errors.state && (
+                        <Text type='danger'>{formik.errors.state}</Text>
+                    )}
+                </div>
+                <div>
+                    <Text>Zip Code</Text>
+                    <Input
+                        name={'zipCode'}
+                        value={formik.values.zipCode}
+                        onChange={formik.handleChange('zipCode')}
+                        status={formik.errors.zipCode && 'error'}
+                    />
+                    {formik.errors.zipCode && (
+                        <Text type='danger'>{formik.errors.zipCode}</Text>
+                    )}
+                </div>
+
                 <Button type={'default'} htmlType='submit' onClick={onPrev}>Previous</Button>
-                <Button type={'primary'} htmlType='submit' onClick={onNext}>Next</Button>
+                <Button type={'primary'} htmlType='submit' onClick={handleNext}>Next</Button>
             </Form>
         </Container>
     )

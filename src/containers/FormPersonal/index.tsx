@@ -12,7 +12,6 @@ interface Personal {
 
 interface PersonalOutput {
     onNext: () => void;
-    onPrev: () => void;
 }
 
 const initalValues = {
@@ -40,6 +39,7 @@ const FormPersonal: React.FC<PersonalOutput> = ({ onNext }) => {
     })
 
     const handleNext = () => {
+        formik.handleSubmit();
         if (formik.isValid) {
             onNext();
         }
@@ -51,37 +51,39 @@ const FormPersonal: React.FC<PersonalOutput> = ({ onNext }) => {
                 <div>
                     <Text>Full Name:</Text>
                     <Input
-                        name={'fullName'}
+                        name={'name'}
                         value={formik.values.name}
                         onChange={formik.handleChange('name')}
-                        status={formik.errors.name && 'error'} />
+                        status={formik.errors.name && 'error'}
+                    />
                     {formik.errors.name && (
-                        <Text>{formik.errors.name}</Text>
+                        <Text type='danger'>{formik.errors.name}</Text>
                     )}
                 </div>
                 <div>
                     <Text>Email Address:</Text>
                     <Input
-                        name={'emailAddress'}
+                        name={'email'}
                         value={formik.values.email}
                         onChange={formik.handleChange('email')}
-                        status={formik.errors.email && 'error'} />
+                        status={formik.errors.email && 'error'}
+                    />
                     {formik.errors.email && (
-                        <Text>{formik.errors.email}</Text>
+                        <Text type='danger'>{formik.errors.email}</Text>
                     )}
                 </div>
                 <div>
-                    <Text>Date of Birth:</Text><br/>
+                    <Text>Date of Birth:</Text><br />
                     <DatePicker
-                        name={'dateOfBirth'}
+                        name={'dob'}
                         value={formik.values.dob ? dayjs(formik.values.dob) : undefined}
                         onChange={(date) => { formik.setFieldValue('dob', date?.toDate() || null) }}
                         status={formik.errors.dob && 'error'}
-                    /><br/>
+                    /><br />
                     {formik.errors.dob && (
-                        <Text>{formik.errors.dob as string}</Text>
+                        <Text type='danger'>{formik.errors.dob as string}</Text>
                     )}
-                </div>
+                </div><br />
                 <Button type={'primary'} htmlType='submit' onClick={handleNext}>Next</Button>
             </Form>
         </Container>

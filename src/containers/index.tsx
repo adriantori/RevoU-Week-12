@@ -1,5 +1,7 @@
 export { default as Navbar } from './Navbar'
 export { default as FormPersonal } from './FormPersonal'
 export { default as FormAddress } from './FormAddress'
+export { default as FormAccount} from './FormAccount'
+export { default as FormFinish} from './FormFinish'
 export { default as FormWrapper } from './FormWrapper'
 export { default as Footer } from './Footer'

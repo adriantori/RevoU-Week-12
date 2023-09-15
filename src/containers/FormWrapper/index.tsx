@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { FormPersonal, FormAddress } from "..";
+import { FormPersonal, FormAddress, FormAccount, FormFinish } from "..";
 
 const FormWrapper = () => {
     const [step, setStep] = useState<number>(1);
 
     const handleNext = () => {
-        if (step === 1) {
+        if (step === 1 || step === 2 || step === 3) {
             setStep((prevStep) => prevStep + 1);
         }
 
@@ -13,7 +13,7 @@ const FormWrapper = () => {
     }
 
     const handlePrev = () => {
-        if (step === 2) {
+        if (step === 2 || step === 3 || step === 4) {
             setStep((prevStep) => prevStep - 1);
         }
 
@@ -23,10 +23,16 @@ const FormWrapper = () => {
     return (
         <>
             {step === 1 && (
-                <FormPersonal onNext={handleNext} onPrev={handlePrev} />
+                <FormPersonal onNext={handleNext} />
             )}
             {step === 2 && (
-                <FormAddress  onNext={handleNext} onPrev={handlePrev}/>
+                <FormAddress onNext={handleNext} onPrev={handlePrev}/>
+            )}
+            {step === 3 && (
+                <FormAccount onNext={handleNext} onPrev={handlePrev}/>
+            )}
+            {step === 4 && (
+                <FormFinish onPrev={handlePrev}/>
             )}
 
         </>
