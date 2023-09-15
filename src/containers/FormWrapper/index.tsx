@@ -6,15 +6,15 @@ import styles from './styles.module.css'
 const steps = [
     {
         title: 'Personal',
-        content: 'First-content',
+        content: 'First-contents',
     },
     {
         title: 'Address',
-        content: 'Second-content',
+        content: 'Second-contents',
     },
     {
         title: 'Account',
-        content: 'Last-content',
+        content: 'Last-contents',
     }
 ];
 
