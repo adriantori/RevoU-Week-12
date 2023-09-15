@@ -1,3 +1,8 @@
-.flexbox{
-    display:flex;
+.ant-layout-sider-children{
+    height:unset !important
 }
+
+.horizontal{
+    flex-direction: row !important;
+}
+

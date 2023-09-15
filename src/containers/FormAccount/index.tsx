@@ -3,6 +3,7 @@ import { Button, Container, Text } from '../../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+
 interface Account {
     username: string;
     password: string;
@@ -48,7 +49,7 @@ const FormAccount: React.FC<AccountOutput> = ({ onNext, onPrev }) => {
 
     return (
         <Container>
-            <Form onFinish={formik.handleSubmit}>
+            <Form onFinish={formik.handleSubmit} style={{position:'relative', height:'100%'}}>
                 <div>
                 <Text>Username:</Text>
                 <Input
@@ -74,8 +75,8 @@ const FormAccount: React.FC<AccountOutput> = ({ onNext, onPrev }) => {
                     <Text type='danger'>{formik.errors.password}</Text>
                 )}
                 </div>
-                <Button type={'default'} htmlType='submit' onClick={onPrev}>Previous</Button>
-                <Button type={'primary'} htmlType='submit' onClick={handleNext}>Next</Button>
+                <Button type={'primary'} htmlType='submit' onClick={onPrev} style={{background:'#7e3030', position: 'absolute', bottom:'32px'}}>Previous</Button>
+                <Button type={'primary'} htmlType='submit' onClick={handleNext} style={{background:'#0b1e1e', position: 'absolute', bottom:'32px', left:'128px'}}>Next</Button>
             </Form>
         </Container>
     )

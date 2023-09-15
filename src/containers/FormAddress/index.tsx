@@ -52,7 +52,7 @@ const FormAddress: React.FC<AddressOutput> = ({ onNext, onPrev }) => {
 
     return (
         <Container>
-            <Form onFinish={formik.handleSubmit}>
+            <Form onFinish={formik.handleSubmit} style={{position:'relative', height:'100%'}}>
                 <div>
                     <Text>Street Address:</Text>
                     <Input
@@ -102,8 +102,8 @@ const FormAddress: React.FC<AddressOutput> = ({ onNext, onPrev }) => {
                     )}
                 </div>
 
-                <Button type={'default'} htmlType='submit' onClick={onPrev}>Previous</Button>
-                <Button type={'primary'} htmlType='submit' onClick={handleNext}>Next</Button>
+                <Button type={'primary'} htmlType='submit' onClick={onPrev} style={{background:'#7e3030', position: 'absolute', bottom:'32px'}}>Previous</Button>
+                <Button type={'primary'} htmlType='submit' onClick={handleNext} style={{background:'#0b1e1e', position: 'absolute', bottom:'32px', left:'128px'}}>Next</Button>
             </Form>
         </Container>
     )

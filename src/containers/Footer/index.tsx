@@ -1,9 +1,10 @@
-
+import { Layout } from 'antd';
+const { Footer:Footers } = Layout
 
 const Footer = () => {
 
     return (
-        <p>Footer</p>
+        <Footers style={{ textAlign: 'center' }}>Adri Antori ©2023 Created for RevoU Week 12</Footers>
     )  
 }
 

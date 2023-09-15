@@ -1,0 +1,11 @@
+.btnPrev{
+    background:'#7e3030';
+    position: absolute;
+    bottom:16px;
+}
+
+.btnNext{
+    
+    position: absolute;
+    bottom:16px;
+}

@@ -47,7 +47,7 @@ const FormPersonal: React.FC<PersonalOutput> = ({ onNext }) => {
 
     return (
         <Container>
-            <Form onFinish={formik.handleSubmit}>
+            <Form onFinish={formik.handleSubmit} style={{position:'relative', height:'100%'}}>
                 <div>
                     <Text>Full Name:</Text>
                     <Input
@@ -79,12 +79,12 @@ const FormPersonal: React.FC<PersonalOutput> = ({ onNext }) => {
                         value={formik.values.dob ? dayjs(formik.values.dob) : undefined}
                         onChange={(date) => { formik.setFieldValue('dob', date?.toDate() || null) }}
                         status={formik.errors.dob && 'error'}
-                    /><br />
+                    />
                     {formik.errors.dob && (
                         <Text type='danger'>{formik.errors.dob as string}</Text>
                     )}
-                </div><br />
-                <Button type={'primary'} htmlType='submit' onClick={handleNext}>Next</Button>
+                </div>
+                <Button type={'primary'} htmlType='submit' onClick={handleNext} style={{background:'#0b1e1e', position: 'absolute', bottom:'32px', left:'128px'}}>Next</Button>
             </Form>
         </Container>
     )

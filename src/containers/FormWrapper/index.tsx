@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Divider, Steps } from "antd"
+import { Divider, Steps, Layout } from "antd"
 import { FormPersonal, FormAddress, FormAccount, FormFinish } from "..";
 import styles from './styles.module.css'
+
+const { Sider } = Layout;
 
 const steps = [
     {
@@ -52,44 +54,42 @@ const FormWrapper = () => {
 
     return (
         <>
-            <Steps
-                current={topStep}
-                items={items}
-            />
-            <Divider />
-            <div className={styles.flexbox}>
-                <div>
-                    <Steps
-                        current={topStep}
-                        onChange={onChange}
-                        direction="vertical"
-                        items={[
-                            {
-                                
-                            },
-                            {
-                                
-                            },
-                            {
-                                
-                            },
-                        ]}
-                    />
-                </div>
-                <div>
-                    {step === 1 && (
-                        <FormPersonal onNext={handleNext} />
-                    )}
-                    {step === 2 && (
-                        <FormAddress onNext={handleNext} onPrev={handlePrev} />
-                    )}
-                    {step === 3 && (
-                        <FormAccount onNext={handleNext} onPrev={handlePrev} />
-                    )}
-                    {step === 4 && (
-                        <FormFinish onPrev={handlePrev} />
-                    )}
-                </div>
+            <div style={{padding:'5vh 20vw'}}>
+                <Steps
+                    className={styles.horizontal}
+                    current={topStep}
+                    items={items}
+                    direction="horizontal"
+                />
+                <Divider />
+                <Layout style={{ padding: '24px 0', height: '60vh', display: 'relative' }}>
+                    <Sider style={{ background: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: '32px' }} width={50}>
+                        <Steps
+                            current={topStep}
+                            onChange={onChange}
+                            direction="vertical"
+                            items={[
+                                {},
+                                {},
+                                {},
+                            ]}
+                        />
+                    </Sider>
+                    <div>
+                        {step === 1 && (
+                            <FormPersonal onNext={handleNext} />
+                        )}
+                        {step === 2 && (
+                            <FormAddress onNext={handleNext} onPrev={handlePrev} />
+                        )}
+                        {step === 3 && (
+                            <FormAccount onNext={handleNext} onPrev={handlePrev} />
+                        )}
+                        {step === 4 && (
+                            <FormFinish onPrev={handlePrev} />
+                        )}
+                    </div>
+                </Layout>
             </div>
         </>
     )
